@@ -1,0 +1,26 @@
+{
+  "Settings": {
+    "title": "Account Settings",
+    "profile": "Profile",
+    "security": {
+      "title": "Security Settings",
+      "password": {
+        "title": "Password",
+        "description": "Change your password to secure your account",
+        "button": "Change Password"
+      },
+      "deleteAccount": {
+        "title": "Delete Account",
+        "description": "Permanently delete your account and all your data"
+      }
+    },
+    "language": {
+      "title": "Language",
+      "description": "Select your preferred language"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Receive notifications about important updates"
+    }
+  }
+}

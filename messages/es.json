@@ -1,0 +1,26 @@
+{
+  "Settings": {
+    "title": "Configuración de la Cuenta",
+    "profile": "Perfil",
+    "security": {
+      "title": "Configuración de Seguridad",
+      "password": {
+        "title": "Contraseña",
+        "description": "Cambie su contraseña para proteger su cuenta",
+        "button": "Cambiar Contraseña"
+      },
+      "deleteAccount": {
+        "title": "Eliminar Cuenta",
+        "description": "Elimine permanentemente su cuenta y todos sus datos"
+      }
+    },
+    "language": {
+      "title": "Idioma",
+      "description": "Seleccione su idioma preferido"
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "description": "Reciba notificaciones sobre actualizaciones importantes"
+    }
+  }
+}

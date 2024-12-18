@@ -1,0 +1,8 @@
+{
+  "/api/cv/current/route": "app/api/cv/current/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/page": "app/page.js",
+  "/(protected)/dashboard/cv/new/import/page": "app/(protected)/dashboard/cv/new/import/page.js",
+  "/(protected)/dashboard/page": "app/(protected)/dashboard/page.js",
+  "/(protected)/dashboard/cv/new/details/page": "app/(protected)/dashboard/cv/new/details/page.js"
+}

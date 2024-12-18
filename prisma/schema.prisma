@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  firstName       String?
+  lastName        String?
+  password        String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  cvs             CV[]
+  curriculum      Curriculum?
+  passwordHistory PasswordHistory[]
+  verificationCode VerificationCode?
+  blocked        Boolean   @default(false)
+  failedLoginAttempts Int      @default(0)
+  lastLogin      DateTime?
+}
+
+model CV {
+  id            String    @id @default(cuid())
+  title         String
+  content       String    // Stored as JSON string
+  templateId    String?
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  isPublished   Boolean   @default(false)
+}
+
+model PasswordHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  changedAt DateTime @default(now())
+  ipAddress String?
+  userAgent String?
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  code      String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Curriculum {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  // Format de la date de naissance : chaîne ISO 8601 (YYYY-MM-DD)
+  // Exemple : '1990-01-15'
+  data      String   // Stockage des données du CV au format JSON, incluant dateNaissance
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
