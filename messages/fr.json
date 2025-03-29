@@ -1,0 +1,26 @@
+{
+  "Settings": {
+    "title": "Paramètres du compte",
+    "profile": "Profil",
+    "security": {
+      "title": "Paramètres de sécurité",
+      "password": {
+        "title": "Mot de passe",
+        "description": "Changez votre mot de passe pour sécuriser votre compte",
+        "button": "Changer mot de passe"
+      },
+      "deleteAccount": {
+        "title": "Supprimer le compte",
+        "description": "Supprimez définitivement votre compte et toutes vos données"
+      }
+    },
+    "language": {
+      "title": "Langue",
+      "description": "Sélectionnez votre langue préférée"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Recevez des notifications sur les mises à jour importantes"
+    }
+  }
+}

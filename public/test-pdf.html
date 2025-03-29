@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+        .error {
+            color: red;
+        }
+        .info {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Upload PDF</h1>
+    <div class="info">
+        ⚠️ Note: Pour tester l'import de CV, utilisez plutôt la page officielle :
+        <a href="/dashboard/cv/new/import" target="_blank">Import de CV</a>
+    </div>
+    <form id="pdfForm">
+        <input type="file" accept=".pdf" name="file" required>
+        <button type="submit">Envoyer le PDF</button>
+    </form>
+    <div class="result" id="result">
+        Les résultats apparaîtront ici...
+    </div>
+
+    <script>
+        document.getElementById('pdfForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Envoi en cours...';
+
+            const formData = new FormData(e.target);
+
+            try {
+                const response = await fetch('/api/pdf', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                // Vérifier d'abord le type de contenu
+                const contentType = response.headers.get('content-type');
+                console.log('Type de contenu reçu:', contentType);
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        resultDiv.innerHTML = `<div class="error">
+                            Erreur: Vous n'êtes pas authentifié. 
+                            Veuillez vous connecter d'abord à l'application principale.
+                            <br><br>
+                            <a href="/login" target="_blank">Se connecter</a>
+                            <br>
+                            Après la connexion, utilisez plutôt la page officielle :
+                            <a href="/dashboard/cv/new/import" target="_blank">Import de CV</a>
+                        </div>`;
+                        return;
+                    }
+
+                    const errorData = await response.json();
+                    resultDiv.innerHTML = `<div class="error">Erreur: ${errorData.error || response.statusText}</div>`;
+                    return;
+                }
+
+                const data = await response.json();
+                resultDiv.textContent = data.text || JSON.stringify(data, null, 2);
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">
+                    Erreur: ${error.message}
+                    <br>
+                    <small>Consultez la console pour plus de détails.</small>
+                </div>`;
+                console.error('Erreur complète:', error);
+            }
+        };
+    </script>
+</body>
+</html>

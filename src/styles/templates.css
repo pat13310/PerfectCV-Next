@@ -1,0 +1,30 @@
+/* Styles pour les templates de CV */
+.cv-template {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 0 auto;
+  background: white;
+}
+
+/* Styles pour l'impression */
+@media print {
+  .cv-template {
+    padding: 0;
+    margin: 0;
+    width: 210mm;
+    height: 297mm;
+  }
+  
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
+
+/* Styles pour l'aperçu à l'écran */
+@media screen {
+  .cv-template {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
